@@ -8,7 +8,7 @@ import local.work.panels.Toolbar;
 import javax.swing.*;
 import java.awt.*;
 
-public class Window extends JPanel {
+public class Window extends JPanel{
 
     private static Toolbar toolbar;
     private static DisplayArea displayArea;
@@ -16,18 +16,16 @@ public class Window extends JPanel {
     private static PropertiesArea propertiesArea;
 
     public Window() {
-        GridLayout grid = new GridLayout(4, 4);
-
         Window.toolbar = new Toolbar();
         Window.displayArea = new DisplayArea();
         Window.fileTreeArea = new FileTreeArea();
         Window.propertiesArea = new PropertiesArea();
 
-        this.add(toolbar, TOP_ALIGNMENT);
-        this.add(fileTreeArea, LEFT_ALIGNMENT);
-        this.add(displayArea, RIGHT_ALIGNMENT);
-        this.add(propertiesArea, BOTTOM_ALIGNMENT);
+        this.setLayout(new BorderLayout());
 
-
+        this.add(toolbar, BorderLayout.NORTH);
+        this.add(label, BorderLayout.EAST);
+        this.add(fileTreeArea, BorderLayout.WEST);
+        this.add(propertiesArea, BorderLayout.SOUTH);
     }
 }
