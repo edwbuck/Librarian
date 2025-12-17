@@ -1,6 +1,7 @@
 package local.work.panels;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class DisplayArea extends JPanel{
     private static JLabel label;
@@ -10,5 +11,7 @@ public class DisplayArea extends JPanel{
 
         this.add(label);
         label.setAlignmentY(0.5f);
+
+        this.setBackground(new Color(85, 170, 0));
     }
 }

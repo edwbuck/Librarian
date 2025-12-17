@@ -24,7 +24,7 @@ public class Window extends JPanel{
         this.setLayout(new BorderLayout());
 
         this.add(toolbar, BorderLayout.NORTH);
-        this.add(label, BorderLayout.EAST);
+        this.add(displayArea, BorderLayout.CENTER);
         this.add(fileTreeArea, BorderLayout.WEST);
         this.add(propertiesArea, BorderLayout.SOUTH);
     }

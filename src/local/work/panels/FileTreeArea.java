@@ -11,5 +11,7 @@ public class FileTreeArea extends JPanel{
 
         this.add(label);
         label.setAlignmentY(0f);
+
+        this.setBackground(new Color(140, 71, 170));
     }
 }
