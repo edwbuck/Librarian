@@ -25,6 +25,7 @@ public class Window extends JPanel{
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.weightx = 0.5;
         gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.BOTH;
 
         Window.toolbar = new Toolbar();
         gbc.gridx = 0;
@@ -41,14 +42,14 @@ public class Window extends JPanel{
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 1;
-        gbc.gridheight = 2;
+        gbc.gridheight = 3;
         this.add(fileTreeArea, gbc);
 
         Window.displayArea = new DisplayArea();
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.gridwidth = 3;
-        gbc.gridheight = 2;
+        gbc.gridheight = 3;
         this.add(displayArea, gbc);
 
         Window.propertiesArea = new PropertiesArea();
