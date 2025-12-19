@@ -10,5 +10,7 @@ public class PropertiesArea extends JPanel {
         PropertiesArea.label = new JLabel("Properties Area");
 
         label.setAlignmentY(0.5f);
+        this.add(label);
+        this.setBackground(Color.BLUE);
     }
 }

@@ -7,6 +7,7 @@ public class FileTreeArea extends JPanel{
     private static JLabel label;
 
     public FileTreeArea() {
+        this.setBackground(Color.YELLOW);
         FileTreeArea.label = new JLabel("File Tree Area");
 
         this.add(label);

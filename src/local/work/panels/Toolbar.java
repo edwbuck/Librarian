@@ -13,6 +13,6 @@ public class Toolbar extends JPanel{
         addressBar.setPreferredSize(d);
 
         this.add(addressBar);
-//        addressBar.setAlignmentY(0f);
+        this.setBackground(Color.RED);
     }
 }

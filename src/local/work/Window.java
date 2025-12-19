@@ -38,18 +38,18 @@ public class Window extends JPanel{
         gbc.gridheight = 2;
         this.add(fileTreeArea, gbc);
 
-        Window.propertiesArea = new PropertiesArea();
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        gbc.gridwidth = 4;
-        gbc.gridheight = 1;
-        this.add(propertiesArea, gbc);
-
         Window.displayArea = new DisplayArea();
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.gridwidth = 3;
         gbc.gridheight = 2;
         this.add(displayArea, gbc);
+
+        Window.propertiesArea = new PropertiesArea();
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.gridwidth = 4;
+        gbc.gridheight = 1;
+        this.add(propertiesArea, gbc);
     }
 }
