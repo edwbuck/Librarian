@@ -16,7 +16,7 @@ public class Window extends JPanel{
     private static PropertiesArea propertiesArea;
 
     public Window() {
-        int[] rh = {125, 125, 125, 125};
+        int[] rh = {125, 125, 125, 125, 125};
         int[] cw = {200, 200, 200, 200};
         GridBagLayout layout = new GridBagLayout();
         layout.rowHeights = rh;
