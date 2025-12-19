@@ -16,10 +16,15 @@ public class Window extends JPanel{
     private static PropertiesArea propertiesArea;
 
     public Window() {
-        this.setLayout(new GridBagLayout());
+        int[] rh = {125, 125, 125, 125};
+        int[] cw = {200, 200, 200, 200};
+        GridBagLayout layout = new GridBagLayout();
+        layout.rowHeights = rh;
+        layout.columnWidths = cw;
+        this.setLayout(layout);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.weightx = 0.5;
-        gbc.anchor = GridBagConstraints.NORTHWEST;
+        gbc.anchor = GridBagConstraints.CENTER;
 
         Window.toolbar = new Toolbar();
         gbc.gridx = 0;
@@ -30,6 +35,7 @@ public class Window extends JPanel{
 
         gbc.weightx = 1;
         gbc.weighty = 1;
+        gbc.anchor = GridBagConstraints.NORTHWEST;
 
         Window.fileTreeArea = new FileTreeArea();
         gbc.gridx = 0;
