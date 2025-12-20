@@ -5,6 +5,7 @@ import java.awt.*;
 
 public class Main {
     private static void instLibrarian() {
+        Brain brain = new Brain();
         Dimension d = new Dimension(800, 500);
         JFrame frame = new JFrame();
         Window window = new Window();
@@ -13,6 +14,7 @@ public class Main {
         frame.pack();
         frame.setMinimumSize(d);
         frame.setVisible(true);
+        System.out.println(brain.getRootDir());
     }
 
     public static void main(String[] args) {

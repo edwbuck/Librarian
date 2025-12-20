@@ -81,9 +81,6 @@ public class Window extends JPanel{
         gbc.weightx = 0.5;
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.BOTH;
-        /* /\/\/\ *This line will come out at some point when we no longer need to demonstrate correct theoretical use
-        of space.
-         */
 
         gbc.gridx = 0;
         gbc.gridy = 0;
