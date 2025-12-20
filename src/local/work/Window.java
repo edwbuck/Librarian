@@ -11,18 +11,25 @@ import javax.swing.border.Border;
 
 public class Window extends JPanel{
 
-    private static Toolbar toolbar;
-    private static DisplayArea displayArea;
-    private static FileTreeArea fileTreeArea;
-    private static PropertiesArea propertiesArea;
+    private Toolbar toolbar;
+    private DisplayArea displayArea;
+    private FileTreeArea fileTreeArea;
+    private PropertiesArea propertiesArea;
+    private JPanel[] panels;
 
     public Window() {
+        toolbar = new Toolbar();
+        fileTreeArea = new FileTreeArea();
+        displayArea = new DisplayArea();
+        propertiesArea = new PropertiesArea();
+
         JPanel[] panels = {
-                Window.toolbar = new Toolbar(),
-                Window.fileTreeArea = new FileTreeArea(),
-                Window.displayArea = new DisplayArea(),
-                Window.propertiesArea = new PropertiesArea()
+                toolbar,
+                displayArea,
+                fileTreeArea,
+                propertiesArea
         };
+
         Border border = BorderFactory.createLineBorder(Color.DARK_GRAY);
         int[] rh = {125, 125, 125, 125, 125};
         int[] cw = {200, 200, 200, 200};
