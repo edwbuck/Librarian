@@ -51,24 +51,42 @@ public class Window extends JPanel{
         this.propertiesArea = propertiesArea;
     }
 
+    public void propagateRoot(String rootDir){
+        for (JPanel panel : panels) {
+            if (panel instanceof Toolbar) {
+                Toolbar.setAddressBar(rootDir);
+            }
+            else if (panel instanceof FileTreeArea) {
+                FileTreeArea.setLabel(rootDir);
+            }
+            else if (panel instanceof PropertiesArea) {
+                PropertiesArea.setLabel(rootDir);
+            }
+        }
+    }
+
     private Toolbar toolbar;
     private DisplayArea displayArea;
     private FileTreeArea fileTreeArea;
     private PropertiesArea propertiesArea;
     private JPanel[] panels;
+    private Brain brain;
 
-    public Window() {
+    public Window(Brain brain) {
         toolbar = new Toolbar();
         fileTreeArea = new FileTreeArea();
         displayArea = new DisplayArea();
         propertiesArea = new PropertiesArea();
+        this.brain = brain;
 
-        JPanel[] panels = {
+        this.panels = new JPanel[] {
                 toolbar,
                 displayArea,
                 fileTreeArea,
                 propertiesArea
         };
+
+        propagateRoot(brain.getRootDir());
 
         Border border = BorderFactory.createLineBorder(Color.DARK_GRAY);
         int[] rh = {125, 125, 125, 125, 125};

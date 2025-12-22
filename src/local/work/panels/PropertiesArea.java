@@ -10,8 +10,8 @@ public class PropertiesArea extends JPanel {
         return label;
     }
 
-    public static void setLabel(JLabel label) {
-        PropertiesArea.label = label;
+    public static void setLabel(String t) {
+        label.setText(t);
     }
 
     public PropertiesArea() {

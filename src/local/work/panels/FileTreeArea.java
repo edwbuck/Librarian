@@ -10,8 +10,8 @@ public class FileTreeArea extends JPanel{
         return label;
     }
 
-    public static void setLabel(JLabel label) {
-        FileTreeArea.label = label;
+    public static void setLabel(String t) {
+        label.setText(t);
     }
 
     public FileTreeArea() {

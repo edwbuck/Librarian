@@ -5,8 +5,8 @@ import java.nio.file.FileSystems;
 
 public class Brain {
 
-    private FileSystem fileSystem;
-    private String rootDir;
+    private static FileSystem fileSystem;
+    private static String rootDir;
 
     public String getRootDir() {
         return rootDir;
@@ -14,29 +14,7 @@ public class Brain {
 
     public Brain() {
         fileSystem = FileSystems.getDefault();
-        rootDir = fileSystem.getRootDirectories().toString();
+        rootDir = String.valueOf('/'); // Change this logic if extending this applicatation to Windows or Mac.
+
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

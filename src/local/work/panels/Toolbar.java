@@ -11,8 +11,8 @@ public class Toolbar extends JPanel{
         return addressBar;
     }
 
-    public static void setAddressBar(JTextField addressBar) {
-        Toolbar.addressBar = addressBar;
+    public static void setAddressBar(String t) {
+        addressBar.setText(t);
     }
 
     public Toolbar() {
