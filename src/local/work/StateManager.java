@@ -1,3 +1,10 @@
+/*
+StateManager will act as the interface between the Brain and the Window; at no point should the Brain OR the
+WindowManager be responsible for state management. I.e., if the message, address, or metadata that the program is
+looking at changes, the Window will only change its display if the StateManager tells it to. Of course,
+that means that StateManager needs to be CONSTANTLY updating.
+*/
+
 package local.work;
 
 import local.work.panels.*;
