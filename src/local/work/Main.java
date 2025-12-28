@@ -5,11 +5,11 @@ import java.awt.*;
 
 public class Main {
     private static void instLibrarian() {
-        Brain brain = new Brain();
         Dimension d = new Dimension(800, 500);
         JFrame frame = new JFrame();
         Window window = new Window();
-        StateManager stateManager = new StateManager(window.getPanels(), brain);
+        Brain brain = new Brain(window.getPanels());
+//        StateManager stateManager = new StateManager(window.getPanels(), brain);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(window);
         frame.pack();

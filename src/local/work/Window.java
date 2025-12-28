@@ -56,6 +56,7 @@ public class Window extends JPanel{
     private FileTreeArea fileTreeArea;
     private PropertiesArea propertiesArea;
     private JPanel[] panels;
+    Brain brain;
 
     public Window() {
         toolbar = new Toolbar();

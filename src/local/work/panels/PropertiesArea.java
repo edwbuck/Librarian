@@ -1,9 +1,11 @@
 package local.work.panels;
 
+import local.work.Brain;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class PropertiesArea extends JPanel {
+public class PropertiesArea extends JPanel implements BrainClient{
     private static JLabel label;
 
     public static JLabel getLabel() {
@@ -14,7 +16,14 @@ public class PropertiesArea extends JPanel {
         label.setText(t);
     }
 
+    public void update() {}
+
+    public void update(String u) {
+        setLabel(u);
+    }
+
     public PropertiesArea() {
+        super();
         PropertiesArea.label = new JLabel("Properties Area");
 
         label.setAlignmentY(0.5f);
