@@ -28,7 +28,6 @@ public class Brain {
     public Brain(JPanel[] panels) {
         fileSystem = FileSystems.getDefault();
         rootDir = String.valueOf('/'); // Change this logic if extending this application to Windows or Mac.
-//        this.panels = panels;
         publish(panels);
     }
 }

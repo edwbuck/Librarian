@@ -9,7 +9,6 @@ public class Main {
         JFrame frame = new JFrame();
         Window window = new Window();
         Brain brain = new Brain(window.getPanels());
-//        StateManager stateManager = new StateManager(window.getPanels(), brain);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(window);
         frame.pack();
