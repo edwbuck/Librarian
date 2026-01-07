@@ -1,8 +1,6 @@
 package local.work.panels;
 
 import local.work.Brain;
-import org.jetbrains.annotations.NotNull;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,7 +12,7 @@ public class Toolbar extends JPanel implements BrainClient, ActionListener {
     private static JTextField addressBar;
     private static Brain brain;
     private static Dimension d;
-
+    private static Dimension iconSize;
 
     public static String getAddressBar() {
         return addressBar.getText();
@@ -31,16 +29,10 @@ public class Toolbar extends JPanel implements BrainClient, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String s = getSendInfo();
         if (e.getSource() == homeBtn) {
-            brain.publish(s);
+            brain.publish("~");
         }
     }
-
-    public String getSendInfo() {
-        return "String set!";
-    }
-
 
     @Override
    public void update() {}
@@ -50,7 +42,7 @@ public class Toolbar extends JPanel implements BrainClient, ActionListener {
         setAddressBar(u);
     }
 
-    private @NotNull ImageIcon setIconSize(ImageIcon icon) {
+    private ImageIcon setIconSize(ImageIcon icon) {
         Image img = icon.getImage();
         Image resizedImg = img.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
         return new ImageIcon(resizedImg);
@@ -58,8 +50,10 @@ public class Toolbar extends JPanel implements BrainClient, ActionListener {
 
     public Toolbar() {
         super();
+        Toolbar.iconSize = new Dimension(25, 25);
 
         Toolbar.homeIcon = new ImageIcon(getClass().getResource("../../../resources/home-2504.png"));
+        Toolbar.homeIcon = setIconSize(Toolbar.homeIcon);
         Toolbar.homeBtn = new JButton(Toolbar.homeIcon);
         Toolbar.homeBtn.setPreferredSize(Toolbar.iconSize);
         Toolbar.homeBtn.addActionListener(this);
