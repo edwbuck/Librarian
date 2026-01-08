@@ -13,6 +13,7 @@ public class Brain {
     private static FileSystem fileSystem;
     private static String rootDir;
     private static String currentLocation;
+    private static Window window;
     private static JPanel[] panels;
     public static Stack<String> history;
     private static boolean caller;
@@ -29,7 +30,6 @@ public class Brain {
 
     public void getBack() {
         if (history.empty()) {
-        System.out.println("Stack empty!");
         // In future, replace terminal println with window in message
         }
         else if (history.peek() != null && !history.empty()) {
@@ -49,8 +49,9 @@ public class Brain {
         return currentLocation;
     }
 
-    public Brain(JPanel[] panels) {
-        this.panels = panels;
+    public Brain(@NotNull Window window) {
+        this.window = window;
+        this.panels = window.getPanels();
         history = new Stack<String>();
         fileSystem = FileSystems.getDefault();
         rootDir = String.valueOf('/'); // Change this logic if extending this application to Windows or Mac.
