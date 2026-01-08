@@ -1,7 +1,6 @@
 package local.work;
 
 import local.work.panels.BrainClient;
-import local.work.panels.Toolbar;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -30,23 +29,16 @@ public class Brain {
     }
 
     public void getBack() {
-        JButton bb = window.getToolbar().getBackBtn();
         if (history.empty()) {
-            bb.setEnabled(false);
+        System.out.println("Stack empty!");
         // In future, replace terminal println with window in message
         }
         else if (history.peek() != null && !history.empty()) {
             String backElement = history.pop();
             this.publish(backElement);
-            if (!bb.isEnabled()) {
-                bb.setEnabled(true);
-            }
         }
         else if (history.peek() == null && !history.empty()) {
             this.publish(rootDir);
-            if (bb.isEnabled()) {
-                bb.setEnabled(false);
-            }
         }
     }
 

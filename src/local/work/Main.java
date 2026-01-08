@@ -8,7 +8,7 @@ public class Main {
         Dimension d = new Dimension(800, 500);
         JFrame frame = new JFrame();
         Window window = new Window();
-        Brain brain = new Brain(window);
+        Brain brain = new Brain(window.getPanels());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(window);
         frame.pack();
