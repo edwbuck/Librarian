@@ -64,6 +64,10 @@ public class Toolbar extends JPanel implements BrainClient, ActionListener {
         return new ImageIcon(resizedImg);
     }
 
+    public JButton getBackBtn() {
+        return backBtn;
+    }
+
     public Toolbar() {
         super();
         Toolbar.iconSize = new Dimension(25, 25);
