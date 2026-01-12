@@ -3,6 +3,8 @@ package local.work.panels;
 import local.work.Brain;
 import javax.swing.*;
 import java.awt.*;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Path;
 
 public class FileTreeArea extends JPanel implements BrainClient {
     private static JLabel label;
@@ -27,6 +29,11 @@ public class FileTreeArea extends JPanel implements BrainClient {
     @Override
     public void update(String u) {
         setLabel(u);
+        DirectoryStream<Path> contents = brain.getContents();
+        for (Path entry : contents) {
+            JLabel e = new JLabel("    " + entry);
+            this.add(e);
+        }
     }
 
     public FileTreeArea() {

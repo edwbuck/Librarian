@@ -17,32 +17,35 @@ public class Brain {
     private static Window window;
     private static JPanel[] panels;
     public static Stack<String> history;
+    private DirectoryStream<Path> contents;
     private static boolean caller;
 
-    public void breakdownDirectory(String path) {
+    public DirectoryStream<Path> breakdownDirectory(String path) {
         Path filepath = Paths.get(path);
         if (Files.exists(filepath) && Files.isDirectory(filepath)) {
             try (DirectoryStream<Path> stream = Files.newDirectoryStream(filepath)) {
                 for (Path entry : stream) {
                     System.out.println(entry.getFileName());
                 }
+                return stream;
             }
             catch (Exception e) {
                 System.out.println("Listing error");
+                return null;
             }
         }
         else {
             System.out.println("Invalid path");
+            return null;
         }
     }
 
     public void publish(String string) {
         setBackButtonState();
-        breakdownDirectory(string);
+        this.contents = breakdownDirectory(string);
         for (JPanel panel : panels) {
             if (panel instanceof BrainClient) {
                 ((BrainClient) panel).update(string);
-                ((BrainClient) panel).setBrain(this);
             }
         }
     }
@@ -69,9 +72,18 @@ public class Brain {
         return currentLocation;
     }
 
+    public DirectoryStream<Path> getContents() {
+        return contents;
+    }
+
     public Brain(@NotNull Window window) {
         this.window = window;
         this.panels = window.getPanels();
+        for (JPanel panel : panels) {
+            if (panel instanceof BrainClient) {
+                ((BrainClient) panel).setBrain(this);
+            }
+        }
         history = new Stack<String>();
         rootDir = String.valueOf('/'); // Change this logic if extending this application to Windows or Mac.
         currentLocation = null;
