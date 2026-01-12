@@ -1,6 +1,8 @@
 package local.work.panels;
 
 import local.work.Brain;
+import local.work.datahandlers.TreeStreamParser;
+
 import javax.swing.*;
 import java.awt.*;
 import java.nio.file.DirectoryStream;
@@ -26,14 +28,22 @@ public class FileTreeArea extends JPanel implements BrainClient {
     @Override
     public void update() {}
 
+    private void start() {
+        TreeStreamParser parser = new TreeStreamParser(brain.getContents()) {
+
+            @Override
+            protected void done() {
+                try {
+                    
+                }
+            }
+        }
+    }
+
     @Override
     public void update(String u) {
         setLabel(u);
-        DirectoryStream<Path> contents = brain.getContents();
-        for (Path entry : contents) {
-            JLabel e = new JLabel("    " + entry);
-            this.add(e);
-        }
+
     }
 
     public FileTreeArea() {
