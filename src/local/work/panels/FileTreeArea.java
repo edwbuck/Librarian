@@ -30,10 +30,10 @@ public class FileTreeArea extends JPanel implements BrainClient {
     }
 
     public FileTreeArea() {
+        this.setLayout(new BorderLayout());
         this.setBackground(Color.YELLOW);
-        FileTreeArea.label = new JLabel("File Tree Area");
+        this.label = new JLabel("File Tree Area");
 
-        this.add(label);
-        label.setAlignmentY(0f);
+        this.add(label, BorderLayout.NORTH);
     }
 }

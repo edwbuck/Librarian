@@ -14,7 +14,6 @@ public class Main {
         frame.pack();
         frame.setMinimumSize(d);
         frame.setVisible(true);
-        System.out.println(brain.getRootDir());
     }
 
     public static void main(String[] args) {
