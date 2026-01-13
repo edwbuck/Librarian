@@ -23,8 +23,8 @@ public class Brain {
     public DirectoryStream<Path> breakdownDirectory(String path) {
         Path filepath = Paths.get(path);
         if (Files.exists(filepath) && Files.isDirectory(filepath)) {
-            try (DirectoryStream<Path> stream = Files.newDirectoryStream(filepath)) {
-                return stream;
+            try {
+                return Files.newDirectoryStream(filepath);
             }
             catch (Exception e) {
                 System.out.println("Listing error");

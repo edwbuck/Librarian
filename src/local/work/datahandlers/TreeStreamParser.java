@@ -24,7 +24,7 @@ public class TreeStreamParser extends SwingWorker<Void, Path> {
 
     @Override
     protected Void doInBackground() throws Exception {
-        for (Path entry : ds) {
+        for (Path entry : this.ds) {
             publish(entry);
         }
         return null;
@@ -32,9 +32,21 @@ public class TreeStreamParser extends SwingWorker<Void, Path> {
 
     @Override
     protected void process(@NotNull List<Path> chunks) {
-        Path p = chunks.get(chunks.size() - 1);
-        JLabel hyperable = new JLabel(p.getFileName().toString());
-//        hyperable.setText(p.getFileName().toString());
-        handler.handleLabel(hyperable);
+        for (Path p : chunks) {
+            JLabel hyperable = new JLabel(p.getFileName().toString());
+            handler.handleLabel(hyperable);
+        }
+    }
+
+    @Override
+    protected void done() {
+        try {
+            if (ds != null) {
+                ds.close();
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

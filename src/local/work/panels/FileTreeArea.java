@@ -6,6 +6,7 @@ import local.work.datahandlers.TreeStreamParser;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Path;
 
@@ -27,8 +28,14 @@ public class FileTreeArea extends JPanel implements BrainClient, LabelHander {
     }
 
    public void start() {
-       TreeStreamParser parser = new TreeStreamParser(brain.getContents(), this);
-       parser.execute();
+        DirectoryStream<Path> ds = brain.getContents();
+        if (ds != null) {
+            TreeStreamParser parser = new TreeStreamParser(ds, this);
+            parser.execute();
+        }
+        else {
+            System.out.println("No Directory Stream returned!");
+        }
    }
 
    @Override
