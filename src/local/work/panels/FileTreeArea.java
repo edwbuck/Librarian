@@ -1,10 +1,16 @@
 package local.work.panels;
 
 import local.work.Brain;
+import local.work.datahandlers.LabelHander;
+import local.work.datahandlers.TreeStreamParser;
+
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Path;
 
-public class FileTreeArea extends JPanel implements BrainClient {
+public class FileTreeArea extends JPanel implements BrainClient, LabelHander {
     private static JLabel label;
     private static Brain brain;
 
@@ -21,19 +27,40 @@ public class FileTreeArea extends JPanel implements BrainClient {
         this.brain = brain;
     }
 
+   public void start() {
+        DirectoryStream<Path> ds = brain.getContents();
+        if (ds != null) {
+            TreeStreamParser parser = new TreeStreamParser(ds, this);
+            parser.execute();
+        }
+        else {
+            System.out.println("No Directory Stream returned!");
+        }
+   }
+
+   @Override
+   public void handleLabel(JLabel label) {
+        SwingUtilities.invokeLater(() -> {
+            this.add(label);
+            this.revalidate();
+            this.repaint();
+        });
+   }
+
     @Override
     public void update() {}
 
     @Override
     public void update(String u) {
         setLabel(u);
+        start();
     }
 
     public FileTreeArea() {
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBackground(Color.YELLOW);
-        FileTreeArea.label = new JLabel("File Tree Area");
+        this.label = new JLabel("File Tree Area");
 
         this.add(label);
-        label.setAlignmentY(0f);
     }
 }
