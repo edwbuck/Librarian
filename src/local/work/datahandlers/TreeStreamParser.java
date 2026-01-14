@@ -32,18 +32,19 @@ public class TreeStreamParser extends SwingWorker<Void, Path> {
 
     @Override
     protected void process(@NotNull List<Path> chunks) {
-        JScrollPane scrollPane = new JScrollPane(
-                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED
-        );
-        scrollPane.setLayout(new BoxLayout(scrollPane, BoxLayout.Y_AXIS));
-
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         for (Path p : chunks) {
             JLabel hyperable = new JLabel(p.getFileName().toString());
             hyperable.setSize(200, 25);
-            scrollPane.add(hyperable);
-            handler.handleLabel(hyperable);
+            panel.add(hyperable);
         }
+        JScrollPane scrollPane = new JScrollPane(
+                panel,
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED
+        );
+        handler.handleParserOutput(scrollPane);
     }
 
     @Override

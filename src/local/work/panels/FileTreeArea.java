@@ -39,9 +39,9 @@ public class FileTreeArea extends JPanel implements BrainClient, LabelHander {
    }
 
    @Override
-   public void handleLabel(JLabel label) {
+   public void handleParserOutput(JComponent c) {
         SwingUtilities.invokeLater(() -> {
-            this.add(label);
+            this.add(c);
             this.revalidate();
             this.repaint();
         });
@@ -53,7 +53,9 @@ public class FileTreeArea extends JPanel implements BrainClient, LabelHander {
     @Override
     public void update(String u) {
         this.removeAll();
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.label = new JLabel(u);
+        this.label.setHorizontalAlignment(JLabel.LEFT);
         this.add(label);
         start();
     }

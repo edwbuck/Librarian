@@ -1,7 +1,7 @@
 package local.work.datahandlers;
 
-import javax.swing.JLabel;
+import javax.swing.*;
 
 public interface LabelHander {
-    void handleLabel(JLabel label);
+    void handleParserOutput(JComponent scrollPane);
 }
