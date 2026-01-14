@@ -10,7 +10,7 @@ import java.io.IOException;
 public class Main {
     private static void instLibrarian() {
         Dimension d = new Dimension(800, 500);
-        JFrame frame = new JFrame();
+        JFrame frame = new JFrame("Librarian File Explorer");
         Window window = new Window();
         Brain brain = new Brain(window);
 
