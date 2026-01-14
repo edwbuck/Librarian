@@ -1,7 +1,11 @@
 package local.work;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class Main {
     private static void instLibrarian() {
@@ -9,6 +13,16 @@ public class Main {
         JFrame frame = new JFrame();
         Window window = new Window();
         Brain brain = new Brain(window);
+
+        try {
+            BufferedImage icon = ImageIO.read(new File("src/resources/book-logo.png"));
+            Image rIcon = icon.getScaledInstance(32, 32, Image.SCALE_SMOOTH);
+            frame.setIconImage(rIcon);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(window);
         frame.pack();

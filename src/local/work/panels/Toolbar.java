@@ -47,7 +47,6 @@ public class Toolbar extends JPanel implements BrainClient, ActionListener {
         else if (e.getSource() == backBtn) {
             brain.getBack();
         }
-        // Implement a Java "Stack" reference type here to add functionality to the back button.
     }
 
     @Override

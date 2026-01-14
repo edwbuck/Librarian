@@ -73,6 +73,12 @@ public class Brain {
         return contents;
     }
 
+    // Add logic to set the current location so that the parts of the window are updated according
+    // to the most current information.
+    public static void setCurrentLocation(String currentLocation) {
+        Brain.currentLocation = currentLocation;
+    }
+
     public Brain(@NotNull Window window) {
         this.window = window;
         this.panels = window.getPanels();
