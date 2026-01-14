@@ -39,10 +39,11 @@ public class Brain {
 
     public void publish(String string) {
         setBackButtonState();
+        setCurrentLocation(string);
         this.contents = breakdownDirectory(string);
         for (JPanel panel : panels) {
             if (panel instanceof BrainClient) {
-                ((BrainClient) panel).update(string);
+                ((BrainClient) panel).update(this.getCurrentLocation());
             }
         }
     }

@@ -52,17 +52,19 @@ public class FileTreeArea extends JPanel implements BrainClient, WorkerOutputHan
     @Override
     public void update(String u) {
         this.removeAll();
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.label = new JLabel(u);
-        this.label.setHorizontalAlignment(JLabel.LEFT);
-        this.add(label);
+        this.setLayout(new FlowLayout(FlowLayout.LEADING, 0, 0));
         start();
+        setLabel("Look in:   " + u);
+//        label.setPreferredSize(new Dimension(Integer.MAX_VALUE, 25));
+        System.out.println(label.getBounds());
+        this.add(label);
     }
 
     public FileTreeArea() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBackground(Color.YELLOW);
         this.label = new JLabel("File Tree Area");
+        label.setHorizontalAlignment(JLabel.LEFT);
 
         this.add(label);
     }

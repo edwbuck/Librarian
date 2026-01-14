@@ -3,6 +3,7 @@ package local.work.datahandlers;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Path;
@@ -44,6 +45,8 @@ public class TreeStreamParser extends SwingWorker<Void, Path> {
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED
         );
+        Dimension scP = new Dimension(200, 375);
+        scrollPane.setPreferredSize(scP);
         handler.handleParserOutput(scrollPane);
     }
 
