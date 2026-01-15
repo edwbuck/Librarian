@@ -3,20 +3,43 @@ package local.work.panels;
 import local.work.Brain;
 import local.work.datahandlers.WorkerOutputHandler;
 import local.work.datahandlers.TreeStreamParser;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Path;
 
-public class FileTreeArea extends JPanel implements BrainClient, WorkerOutputHandler {
+public class FileTreeArea extends JPanel implements BrainClient, ActionListener, WorkerOutputHandler {
     private static JLabel label;
     private static Brain brain;
     private static GroupLayout layout;
     private static GroupLayout.SequentialGroup group;
 
+    @Override
+    public void actionPerformed(@NotNull ActionEvent ae) {
+        String toBePassed = ae.getActionCommand();
+        try {
+            brain.publish(brain.getCurrentLocation() + toBePassed);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static JLabel getLabel() {
         return label;
+    }
+
+    @Override
+    public void handleParserOutput(JComponent c) {
+        SwingUtilities.invokeLater(() -> {
+            group.addComponent(c);
+            this.revalidate();
+            this.repaint();
+        });
     }
 
     public static void setLabel(String t) {
@@ -31,21 +54,12 @@ public class FileTreeArea extends JPanel implements BrainClient, WorkerOutputHan
    public void start() {
         DirectoryStream<Path> ds = brain.getContents();
         if (ds != null) {
-            TreeStreamParser parser = new TreeStreamParser(ds, this);
+            TreeStreamParser parser = new TreeStreamParser(ds, this, this);
             parser.execute();
         }
         else {
             System.out.println("No Directory Stream returned!");
         }
-   }
-
-   @Override
-   public void handleParserOutput(JComponent c) {
-        SwingUtilities.invokeLater(() -> {
-            group.addComponent(c);
-            this.revalidate();
-            this.repaint();
-        });
    }
 
     @Override

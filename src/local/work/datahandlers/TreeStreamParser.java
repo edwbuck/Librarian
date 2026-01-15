@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
@@ -17,11 +18,15 @@ public class TreeStreamParser extends SwingWorker<Void, Path> {
 
     private DirectoryStream<Path> ds;
     private WorkerOutputHandler handler;
+    private ActionListener listener;
 
-    public TreeStreamParser(DirectoryStream<Path> ds, WorkerOutputHandler handler) {
+    public TreeStreamParser(DirectoryStream<Path> ds,
+                            WorkerOutputHandler handler,
+                            ActionListener listener) {
 
         this.ds = ds;
         this.handler = handler;
+        this.listener = listener;
 
     }
 
@@ -43,6 +48,8 @@ public class TreeStreamParser extends SwingWorker<Void, Path> {
             ImageIcon icon = new ImageIcon("src/resources/close-folder.png");
             hyperable.setIcon(icon);
             hyperable.setMargin(m);
+            hyperable.setActionCommand(p.getFileName().toString());
+            hyperable.addActionListener(listener);
             panel.add(hyperable);
         }
         JScrollPane scrollPane = new JScrollPane(
