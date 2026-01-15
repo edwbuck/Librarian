@@ -2,8 +2,10 @@ package local.work.datahandlers;
 
 import org.jetbrains.annotations.NotNull;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Path;
@@ -33,11 +35,14 @@ public class TreeStreamParser extends SwingWorker<Void, Path> {
 
     @Override
     protected void process(@NotNull List<Path> chunks) {
+        Insets m = new Insets(4, 4, 4, 2);
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         for (Path p : chunks) {
-            JLabel hyperable = new JLabel(p.getFileName().toString());
-            hyperable.setSize(200, 25);
+            JButton hyperable = new JButton(p.getFileName().toString());
+            ImageIcon icon = new ImageIcon("src/resources/close-folder.png");
+            hyperable.setIcon(icon);
+            hyperable.setMargin(m);
             panel.add(hyperable);
         }
         JScrollPane scrollPane = new JScrollPane(

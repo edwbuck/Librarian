@@ -59,8 +59,10 @@ public class FileTreeArea extends JPanel implements BrainClient, WorkerOutputHan
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
         this.label = new JLabel();
+        ImageIcon icon = new ImageIcon("src/resources/open-folder.png");
+        label.setIcon(icon);
         label.setHorizontalAlignment(SwingConstants.LEFT);
-        setLabel("Look in:   " + u);
+        setLabel(u);
 
         group.addComponent(label);
         start();
