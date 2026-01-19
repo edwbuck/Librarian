@@ -37,7 +37,7 @@ public class DisplayArea extends JPanel implements BrainClient, ActionListener, 
     public void start() {
         DirectoryStream<Path> ds = brain.getContents();
         if (ds != null) {
-            DisplayParser parser = new DisplayParser(ds, this, this);
+            DisplayParser parser = new DisplayParser(ds, this, this, brain);
             parser.execute();
         }
     }

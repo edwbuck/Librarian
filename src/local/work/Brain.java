@@ -19,9 +19,6 @@ public class Brain {
     private static JPanel[] panels;
     public static Stack<String> history;
     private DirectoryStream<Path> contents;
-    private ArrayList<Path> contentFiles;
-    private ArrayList<Path> contentDirectories;
-    private static boolean caller;
 
     public DirectoryStream<Path> breakdownDirectory(String path) {
         Path filepath = Paths.get(path);
@@ -37,6 +34,16 @@ public class Brain {
         else {
             System.out.println("Invalid path");
             return null;
+        }
+    }
+
+    public boolean isStreamOpen() {
+        try {
+            boolean hasNext = contents.iterator().hasNext();
+            return hasNext;
+        }
+        catch (Exception e) {
+            return false;
         }
     }
 
@@ -60,6 +67,10 @@ public class Brain {
     public void refresh() {
         String peekValue = history.peek();
         publish(peekValue);
+    }
+
+    public void resetContents() {
+        this.contents = breakdownDirectory(history.peek());
     }
 
     private static void setBackButtonState() {
@@ -105,8 +116,6 @@ public class Brain {
                 ((BrainClient) panel).setBrain(this);
             }
         }
-        this.contentDirectories = new ArrayList<>();
-        this.contentFiles = new ArrayList<>();
         history = new Stack<String>();
         rootDir = String.valueOf('/'); // Change this logic if extending this application to Windows or Mac.
         currentLocation = null;

@@ -1,5 +1,6 @@
 package local.work.datahandlers;
 
+import local.work.Brain;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -17,15 +18,18 @@ public class DisplayParser extends SwingWorker<Void, Path> {
     private DirectoryStream<Path> ds;
     private WorkerOutputHandler handler;
     private ActionListener listener;
+    private Brain brain;
 
     public DisplayParser(
             DirectoryStream<Path> ds,
             WorkerOutputHandler handler,
-            ActionListener listener) {
+            ActionListener listener,
+            Brain brain) {
 
         this.ds = ds;
         this.handler = handler;
         this.listener = listener;
+        this.brain = brain;
     }
 
     @Override
@@ -75,5 +79,20 @@ public class DisplayParser extends SwingWorker<Void, Path> {
         Dimension scP = new Dimension(600, 375);
         scrollPane.setPreferredSize(scP);
         handler.handleParserOutput(scrollPane);
+    }
+
+    @Override
+    protected void done() {
+        try {
+            if (ds != null) {
+                ds.close();
+                if (!brain.isStreamOpen()) {
+                    brain.resetContents();
+                }
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

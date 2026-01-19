@@ -1,5 +1,6 @@
 package local.work.datahandlers;
 
+import local.work.Brain;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -18,14 +19,17 @@ public class TreeStreamParser extends SwingWorker<Void, Path> {
     private DirectoryStream<Path> ds;
     private WorkerOutputHandler handler;
     private ActionListener listener;
+    private Brain brain;
 
     public TreeStreamParser(DirectoryStream<Path> ds,
                             WorkerOutputHandler handler,
-                            ActionListener listener) {
+                            ActionListener listener,
+                            Brain brain) {
 
         this.ds = ds;
         this.handler = handler;
         this.listener = listener;
+        this.brain = brain;
 
     }
 
@@ -63,15 +67,18 @@ public class TreeStreamParser extends SwingWorker<Void, Path> {
         handler.handleParserOutput(scrollPane);
     }
 
-//    @Override
-//    protected void done() {
-//        try {
-//            if (ds != null) {
-//                ds.close();
-//            }
-//        }
-//        catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    @Override
+    protected void done() {
+        try {
+            if (ds != null) {
+                ds.close();
+                if (!brain.isStreamOpen()) {
+                    brain.resetContents();
+                }
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
