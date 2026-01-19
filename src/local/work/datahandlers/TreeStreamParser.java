@@ -16,17 +16,14 @@ import java.util.List;
 
 public class TreeStreamParser extends SwingWorker<Void, Path> {
 
-    private DirectoryStream<Path> ds;
     private WorkerOutputHandler handler;
     private ActionListener listener;
     private Brain brain;
 
-    public TreeStreamParser(DirectoryStream<Path> ds,
-                            WorkerOutputHandler handler,
+    public TreeStreamParser(WorkerOutputHandler handler,
                             ActionListener listener,
                             Brain brain) {
 
-        this.ds = ds;
         this.handler = handler;
         this.listener = listener;
         this.brain = brain;
@@ -34,8 +31,9 @@ public class TreeStreamParser extends SwingWorker<Void, Path> {
     }
 
     @Override
-    protected Void doInBackground() throws Exception {
-        for (Path entry : this.ds) {
+    protected Void doInBackground() {
+        brain.resetContents();
+        for (Path entry : brain.getContents()) {
             publish(entry);
         }
         return null;
@@ -67,18 +65,15 @@ public class TreeStreamParser extends SwingWorker<Void, Path> {
         handler.handleParserOutput(scrollPane);
     }
 
-    @Override
-    protected void done() {
-        try {
-            if (ds != null) {
-                ds.close();
-                if (!brain.isStreamOpen()) {
-                    brain.resetContents();
-                }
-            }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    @Override
+//    protected void done() {
+//        try {
+//            if (brain.getContents() != null) {
+//                DirectoryStream<Path> ds = brain.getContents();
+//            }
+//        }
+//        catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

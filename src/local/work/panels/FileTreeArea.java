@@ -89,14 +89,8 @@ public class FileTreeArea extends JPanel implements BrainClient, ActionListener,
     }
 
    public void start() {
-        DirectoryStream<Path> ds = brain.getContents();
-        if (ds != null) {
-            TreeStreamParser parser = new TreeStreamParser(ds, this, this, brain);
-            parser.execute();
-        }
-        else {
-            System.out.println("No Directory Stream returned!");
-        }
+        TreeStreamParser parser = new TreeStreamParser(this, this, brain);
+        parser.execute();
    }
 
     @Override

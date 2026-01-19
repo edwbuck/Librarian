@@ -23,9 +23,12 @@ public class DisplayArea extends JPanel implements BrainClient, ActionListener, 
 
     @Override
     public void handleParserOutput(JComponent c) {
+        System.out.println(c);
         SwingUtilities.invokeLater(() -> {
             this.layout = new BoxLayout(this, BoxLayout.X_AXIS);
             this.add(c);
+            this.revalidate();
+            this.repaint();
         });
     }
 
@@ -35,11 +38,8 @@ public class DisplayArea extends JPanel implements BrainClient, ActionListener, 
     }
 
     public void start() {
-        DirectoryStream<Path> ds = brain.getContents();
-        if (ds != null) {
-            DisplayParser parser = new DisplayParser(ds, this, this, brain);
-            parser.execute();
-        }
+        DisplayParser parser = new DisplayParser(this, this, brain);
+        parser.execute();
     }
 
     @Override
