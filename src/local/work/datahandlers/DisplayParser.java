@@ -44,10 +44,10 @@ public class DisplayParser extends SwingWorker<Void, Path> {
         ArrayList<Path> files = new ArrayList<Path>();
         for (Path p : chunks) {
             if (Files.isDirectory(p)) {
-                directories.add((directories.size() - 1), p);
+                directories.add(p);
             }
             else {
-                files.add((files.size() - 1), p);
+                files.add(p);
             }
         }
         for (Path d : directories) {
