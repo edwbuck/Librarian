@@ -25,7 +25,7 @@ public class DisplayArea extends JPanel implements BrainClient, ActionListener, 
         if (Files.isDirectory(destination)) {
             brain.publish(dest);
         }
-        brain.setTarget(toBePassed, this);
+        brain.setTarget(dest, this);
         System.out.println(brain.getTarget());
     }
 
