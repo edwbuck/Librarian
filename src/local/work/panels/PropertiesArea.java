@@ -13,13 +13,13 @@ public class PropertiesArea extends JPanel implements BrainClient{
         return label;
     }
 
-    public static void setLabel(String t) {
-        label.setText(t);
-    }
-
     @Override
     public void setBrain(Brain brain) {
         this.brain = brain;
+    }
+
+    public static void setLabel(String t) {
+        label.setText(t);
     }
 
     @Override

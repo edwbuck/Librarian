@@ -37,6 +37,22 @@ public class Brain {
         }
     }
 
+    public void getBack() {
+        if (history.size() > 1) {
+            history.pop();
+            String backElement = history.pop();
+            this.publish(backElement);
+        }
+    }
+
+    public DirectoryStream<Path> getContents() { return contents; }
+
+    public String getCurrentLocation() { return currentLocation; }
+
+    public String getRootDir() {
+        return rootDir;
+    }
+
     public void publish(String string) {
         setCurrentLocation(string);
         if (history.empty()) {
@@ -72,28 +88,6 @@ public class Brain {
         }
     }
 
-    public void getBack() {
-        if (history.size() > 1) {
-            history.pop();
-            String backElement = history.pop();
-            this.publish(backElement);
-        }
-    }
-
-    public String getRootDir() {
-        return rootDir;
-    }
-
-    public String getCurrentLocation() {
-        return currentLocation;
-    }
-
-    public DirectoryStream<Path> getContents() {
-        return contents;
-    }
-
-    // Add logic to set the current location so that the parts of the window are updated according
-    // to the most current information.
     public static void setCurrentLocation(String currentLocation) {
         Brain.currentLocation = currentLocation;
     }

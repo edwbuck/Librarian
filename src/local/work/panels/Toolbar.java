@@ -22,19 +22,6 @@ public class Toolbar extends JPanel implements BrainClient, ActionListener {
     private static Dimension d;
     private static Dimension iconSize;
 
-    public static String getAddressBar() {
-        return addressBar.getText();
-    }
-
-    public static void setAddressBar(String t) {
-        addressBar.setText(t);
-    }
-
-    @Override
-    public void setBrain(Brain brain) {
-        this.brain = brain;
-    }
-
     @Override
     public void actionPerformed(@NotNull ActionEvent e) {
         if (e.getSource() == homeBtn) {
@@ -54,12 +41,21 @@ public class Toolbar extends JPanel implements BrainClient, ActionListener {
         }
     }
 
-    @Override
-   public void update() {}
+    public static String getAddressBar() {
+        return addressBar.getText();
+    }
+
+    public JButton getBackBtn() {
+        return backBtn;
+    }
+
+    public static void setAddressBar(String t) {
+        addressBar.setText(t);
+    }
 
     @Override
-    public void update(String u) {
-        setAddressBar(u);
+    public void setBrain(Brain brain) {
+        this.brain = brain;
     }
 
     private @NotNull ImageIcon setIconSize(@NotNull ImageIcon icon) {
@@ -68,9 +64,14 @@ public class Toolbar extends JPanel implements BrainClient, ActionListener {
         return new ImageIcon(resizedImg);
     }
 
-    public JButton getBackBtn() {
-        return backBtn;
+    @Override
+   public void update() {}
+
+    @Override
+    public void update(String u) {
+        setAddressBar(u);
     }
+
 
     public Toolbar() {
         super();
