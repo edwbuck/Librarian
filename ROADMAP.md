@@ -21,10 +21,3 @@ TODO: Add typing input functionality to the Toolbar such that a user can look up
 TODO: Add copy/paste functionality to the Toolbar text field.
 
 TODO: PropertiesArea should display the following features of the targeted folder or file: size, filetype, parent directory.
-
-TODO: Add field to Brain: something along the lines of currentTarget. This can be the Brain's current location, but
-if some file is selected in DisplayArea, that input should override currentTarget if currentTarget is equal to 
-currentLocation.
-
-TODO: PropertiesArea should take input from DisplayArea; but when no input is triggered from DisplayArea, 
-PropertiesArea should default to the information it can extract from the Brain's currentLocation.

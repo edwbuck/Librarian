@@ -1,25 +1,34 @@
 package local.work.panels;
 
 import local.work.Brain;
+import local.work.datahandlers.PropertiesParser;
+import local.work.datahandlers.WorkerOutputHandler;
 
 import javax.swing.*;
 import java.awt.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
-public class PropertiesArea extends JPanel implements BrainClient{
-    private static JLabel label;
+public class PropertiesArea extends JPanel implements BrainClient, WorkerOutputHandler {
     private static Brain brain;
 
-    public static JLabel getLabel() {
-        return label;
-    }
 
     @Override
     public void setBrain(Brain brain) {
         this.brain = brain;
     }
 
-    public static void setLabel(String t) {
-        label.setText(t);
+    @Override
+    public void handleParserOutput(JComponent c) {
+        SwingUtilities.invokeLater(() -> {
+            this.add(c);
+            this.revalidate();
+            this.repaint();
+        });
+    }
+
+    public void start() {
+        PropertiesParser parser = new PropertiesParser(this, brain);
     }
 
     @Override
@@ -27,15 +36,14 @@ public class PropertiesArea extends JPanel implements BrainClient{
 
     @Override
     public void update(String u) {
-        setLabel(u);
+        this.removeAll();
+
+        start();
     }
 
     public PropertiesArea() {
         super();
-        PropertiesArea.label = new JLabel("Properties Area");
 
-        label.setAlignmentY(0.5f);
-        this.add(label);
         this.setBackground(Color.LIGHT_GRAY);
     }
 }

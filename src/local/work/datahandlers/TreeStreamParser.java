@@ -70,6 +70,7 @@ public class TreeStreamParser extends SwingWorker<Void, Path> {
         try {
             if (brain.getContents() != null) {
                 DirectoryStream<Path> ds = brain.getContents();
+                ds.close();
             }
         }
         catch (Exception e) {
