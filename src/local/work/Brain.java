@@ -1,8 +1,10 @@
 package local.work;
 
 import local.work.datahandlers.DisplayParser;
+import local.work.datahandlers.PropertiesParser;
 import local.work.panels.BrainClient;
 import local.work.panels.DisplayArea;
+import local.work.panels.PropertiesArea;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -100,6 +102,11 @@ public class Brain {
     public void setTarget(String t, BrainClient client) {
         if (client instanceof DisplayArea) {
             target = t;
+            for (JPanel panel : panels) {
+                if (panel instanceof PropertiesArea) {
+                    ((PropertiesArea) panel).update(target);
+                }
+            }
         }
         else {
             target = currentLocation;

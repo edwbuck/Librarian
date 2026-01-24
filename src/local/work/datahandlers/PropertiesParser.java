@@ -10,7 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class PropertiesParser extends SwingWorker<Void, Path> {
+public class PropertiesParser extends SwingWorker<Path, Void> {
 
     private WorkerOutputHandler handler;
     private Brain brain;
@@ -23,11 +23,10 @@ public class PropertiesParser extends SwingWorker<Void, Path> {
     }
 
     @Override
-    protected Void doInBackground() {
+    protected Path doInBackground() {
         String target = brain.getTarget();
         Path p = Paths.get(target);
-        publish(p);
-        return null;
+        return p;
     }
 
     private String getFileType(Path p) {
@@ -52,22 +51,31 @@ public class PropertiesParser extends SwingWorker<Void, Path> {
     }
 
     @Override
-    protected void process(@NotNull List<Path> chunks) {
-        for (Path p : chunks) {
-            JLabel name = new JLabel("Name: " + p.getFileName().toString());
-            JLabel size = new JLabel("File Size: " + getSize(p));
-            JLabel type = new JLabel("File type: " + getFileType(p));
-            JLabel parent = new JLabel("Parent: " + brain.getCurrentLocation());
+    protected void done() {
+        try {
+            Path p = get();
 
-            Dimension d = new Dimension(800, 125);
-            JPanel panel = new JPanel();
+            if (p != null) {
+                JLabel name = new JLabel("Name: " + p);
+                JLabel size = new JLabel("File Size: " + getSize(p) + " Bytes");
+                JLabel type = new JLabel("File type: " + getFileType(p));
+                JLabel parent = new JLabel("Parent: " + brain.getCurrentLocation());
 
-            panel.add(name);
-            panel.add(size);
-            panel.add(type);
-            panel.add(parent);
+                Dimension d = new Dimension(800, 125);
+                JPanel panel = new JPanel();
+                panel.setPreferredSize(d);
+                panel.setLayout(new FlowLayout());
 
-            handler.handleParserOutput(panel);
+                panel.add(name);
+                panel.add(size);
+                panel.add(type);
+                panel.add(parent);
+
+                handler.handleParserOutput(panel);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

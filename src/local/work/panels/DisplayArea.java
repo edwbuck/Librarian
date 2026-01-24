@@ -26,7 +26,6 @@ public class DisplayArea extends JPanel implements BrainClient, ActionListener, 
             brain.publish(dest);
         }
         brain.setTarget(dest, this);
-        System.out.println(brain.getTarget());
     }
 
     @Override

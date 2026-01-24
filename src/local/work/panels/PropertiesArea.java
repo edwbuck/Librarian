@@ -29,6 +29,7 @@ public class PropertiesArea extends JPanel implements BrainClient, WorkerOutputH
 
     public void start() {
         PropertiesParser parser = new PropertiesParser(this, brain);
+        parser.execute();
     }
 
     @Override
@@ -38,12 +39,14 @@ public class PropertiesArea extends JPanel implements BrainClient, WorkerOutputH
     public void update(String u) {
         this.removeAll();
 
-        start();
+        if (brain.getTarget() != null) {
+            start();
+        }
     }
 
     public PropertiesArea() {
         super();
 
-        this.setBackground(Color.LIGHT_GRAY);
+        this.setBackground(Color.YELLOW);
     }
 }
