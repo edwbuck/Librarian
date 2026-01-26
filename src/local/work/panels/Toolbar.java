@@ -4,6 +4,7 @@ import local.work.Brain;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -76,6 +77,9 @@ public class Toolbar extends JPanel implements BrainClient, ActionListener {
 
     public Toolbar() {
         super();
+
+        Border border = BorderFactory.createLineBorder(new Color(189, 204, 206));
+
         Toolbar.iconSize = new Dimension(32, 32);
 
         Toolbar.homeIcon = new ImageIcon(getClass().getResource("../../../resources/home-2504.png"));
@@ -106,6 +110,12 @@ public class Toolbar extends JPanel implements BrainClient, ActionListener {
         Toolbar.d = new Dimension(500, 32);
         Toolbar.addressBar = new JTextField();
         addressBar.setPreferredSize(d);
+
+        backBtn.setBorder(border);
+        refreshBtn.setBorder(border);
+        rootBtn.setBorder(border);
+        homeBtn.setBorder(border);
+        addressBar.setBorder(border);
 
         this.add(backBtn);
         this.add(refreshBtn);
