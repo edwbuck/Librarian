@@ -59,6 +59,7 @@ public class FileTreeArea extends JPanel implements BrainClient, ActionListener,
             vgroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(c));
             layout.setHorizontalGroup(hgroup);
             layout.setVerticalGroup(vgroup);
+            c.setBorder(BorderFactory.createLineBorder(new Color(198, 204, 206)));
             sizeLookIn();
             this.revalidate();
             this.repaint();

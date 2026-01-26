@@ -47,6 +47,7 @@ public class TreeStreamParser extends SwingWorker<Void, Path> {
         for (Path p : chunks) {
             if (Files.isDirectory(p)) {
                 JButton hyperable = new JButton(p.getFileName().toString());
+                hyperable.setBackground(new Color(255, 253, 242));
                 ImageIcon icon = new ImageIcon("src/resources/close-folder.png");
                 hyperable.setIcon(icon);
                 hyperable.setMargin(m);
@@ -62,6 +63,7 @@ public class TreeStreamParser extends SwingWorker<Void, Path> {
         );
         Dimension scP = new Dimension(200, 375);
         scrollPane.setPreferredSize(scP);
+        scrollPane.getViewport().getView().setBackground(new Color(255, 250, 198));
         handler.handleParserOutput(scrollPane);
     }
 
