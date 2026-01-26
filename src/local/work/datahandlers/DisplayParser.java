@@ -43,7 +43,6 @@ public class DisplayParser extends SwingWorker<Void, Path> {
     protected void process(@NotNull List<Path> chunks) {
         Dimension scP = new Dimension(600, 375);
         JPanel panel = new JPanel();
-        panel.setPreferredSize(scP);
         panel.setLayout(new GridLayout(7, 3, 50, 10));
         ArrayList<Path> directories = new ArrayList<Path>();
         ArrayList<Path> files = new ArrayList<Path>();
@@ -59,7 +58,7 @@ public class DisplayParser extends SwingWorker<Void, Path> {
         for (Path d : directories) {
             System.out.println("Folder " + d.getFileName().toString());
             JButton dhyperable = new JButton(d.getFileName().toString());
-            dhyperable.setMaximumSize(new Dimension(50, 40));
+            dhyperable.setPreferredSize(new Dimension(120, 40));
             ImageIcon icon = new ImageIcon("src/resources/close-folder.png");
             dhyperable.setIcon(icon);
             dhyperable.setActionCommand(d.getFileName().toString());
@@ -70,7 +69,7 @@ public class DisplayParser extends SwingWorker<Void, Path> {
         for (Path f : files) {
             System.out.println("File " + f.getFileName().toString());
             JButton fhyperable = new JButton(f.getFileName().toString());
-            fhyperable.setMaximumSize(new Dimension(50, 40));
+            fhyperable.setPreferredSize(new Dimension(120, 40));
             ImageIcon icon = new ImageIcon("src/resources/file.png");
             fhyperable.setIcon(icon);
             fhyperable.setActionCommand(f.getFileName().toString());
