@@ -110,10 +110,12 @@ public class Toolbar extends JPanel implements BrainClient, ActionListener {
         Toolbar.backBtn.setPreferredSize(iconSize);
         Toolbar.backBtn.addActionListener(this);
 
-
         Toolbar.d = new Dimension(500, 32);
         Toolbar.addressBar = new JTextField();
         addressBar.setPreferredSize(d);
+        Font font = new Font("Caladea", Font.PLAIN, 18);
+        addressBar.setFont(font);
+        addressBar.setForeground(new Color(113, 106, 110));
 
         backBtn.setBorder(border);
         refreshBtn.setBorder(border);
