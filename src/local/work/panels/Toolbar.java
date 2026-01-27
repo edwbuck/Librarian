@@ -8,6 +8,9 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Toolbar extends JPanel implements BrainClient, ActionListener {
     private static JButton homeBtn;
@@ -40,10 +43,9 @@ public class Toolbar extends JPanel implements BrainClient, ActionListener {
         else if (e.getSource() == refreshBtn) {
             brain.refresh();
         }
-    }
-
-    public static String getAddressBar() {
-        return addressBar.getText();
+        else if (e.getSource() == addressBar) {
+            takeInput();
+        }
     }
 
     public JButton getBackBtn() {
@@ -75,7 +77,15 @@ public class Toolbar extends JPanel implements BrainClient, ActionListener {
     }
 
     public void takeInput() {
-        // This will be the function for the address bar to take input and submit for a publishing check.
+        String userInput = addressBar.getText();
+        Path tryPath = Paths.get(userInput);
+        if (Files.exists(tryPath)) {
+            brain.publish(userInput);
+        }
+        else {
+            String message = new String("Not a valid address!");
+            brain.handleErrorMessage(message);
+        }
     }
 
 
@@ -112,6 +122,7 @@ public class Toolbar extends JPanel implements BrainClient, ActionListener {
 
         Toolbar.d = new Dimension(500, 32);
         Toolbar.addressBar = new JTextField();
+        addressBar.addActionListener(this);
         addressBar.setPreferredSize(d);
         Font font = new Font("Caladea", Font.PLAIN, 18);
         addressBar.setFont(font);

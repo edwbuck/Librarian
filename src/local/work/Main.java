@@ -12,7 +12,7 @@ public class Main {
         Dimension d = new Dimension(800, 500);
         JFrame frame = new JFrame("Librarian File Explorer");
         Window window = new Window();
-        Brain brain = new Brain(window);
+        Brain brain = new Brain(window, frame);
 
         try {
             BufferedImage icon = ImageIO.read(new File("src/resources/book-logo.png"));

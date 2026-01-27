@@ -9,6 +9,7 @@ import local.work.panels.PropertiesArea;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import java.awt.*;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,6 +22,7 @@ public class Brain {
     private static String rootDir;
     private static String currentLocation;
     private static String target;
+    private static JFrame frame;
     private static Window window;
     private static JPanel[] panels;
     public static Stack<String> history;
@@ -60,6 +62,18 @@ public class Brain {
     }
 
     public String getTarget() { return target; }
+
+    public void handleErrorMessage(String message) {
+        JDialog messageBox = new JDialog(frame, "Unfortunate error");
+        JLabel label = new JLabel(message);
+        messageBox.setSize(300, 200);
+        messageBox.getContentPane().setBackground(new Color(255, 250, 198));
+        messageBox.add(label);
+        messageBox.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        messageBox.setModal(true);
+        messageBox.setVisible(true);
+    }
+
 
     public void publish(String string) {
         setCurrentLocation(string);
@@ -114,9 +128,10 @@ public class Brain {
         }
     }
 
-    public Brain(@NotNull Window window) {
+    public Brain(@NotNull Window window, JFrame frame) {
         this.window = window;
         this.panels = window.getPanels();
+        this.frame = frame;
         for (JPanel panel : panels) {
             if (panel instanceof BrainClient) {
                 ((BrainClient) panel).setBrain(this);
