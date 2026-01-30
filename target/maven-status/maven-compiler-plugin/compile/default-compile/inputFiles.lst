@@ -1,0 +1,12 @@
+/home/case_steamer/JavaCode/Librarian/src/main/java/main/local/work/Brain.java
+/home/case_steamer/JavaCode/Librarian/src/main/java/main/local/work/Main.java
+/home/case_steamer/JavaCode/Librarian/src/main/java/main/local/work/Window.java
+/home/case_steamer/JavaCode/Librarian/src/main/java/main/local/work/datahandlers/DisplayParser.java
+/home/case_steamer/JavaCode/Librarian/src/main/java/main/local/work/datahandlers/PropertiesParser.java
+/home/case_steamer/JavaCode/Librarian/src/main/java/main/local/work/datahandlers/TreeStreamParser.java
+/home/case_steamer/JavaCode/Librarian/src/main/java/main/local/work/datahandlers/WorkerOutputHandler.java
+/home/case_steamer/JavaCode/Librarian/src/main/java/main/local/work/panels/BrainClient.java
+/home/case_steamer/JavaCode/Librarian/src/main/java/main/local/work/panels/DisplayArea.java
+/home/case_steamer/JavaCode/Librarian/src/main/java/main/local/work/panels/FileTreeArea.java
+/home/case_steamer/JavaCode/Librarian/src/main/java/main/local/work/panels/PropertiesArea.java
+/home/case_steamer/JavaCode/Librarian/src/main/java/main/local/work/panels/Toolbar.java

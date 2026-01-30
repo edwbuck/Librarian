@@ -98,7 +98,7 @@ public class FileTreeArea extends JPanel implements BrainClient, ActionListener,
     @Override
     public void update(String u) {
         this.removeAll();
-        ImageIcon icon = new ImageIcon("/open-folder.png");
+        ImageIcon icon = new ImageIcon(getClass().getResource("/open-folder.png"));
         this.label = new JLabel(u);
         label.setIcon(icon);
         label.setHorizontalAlignment(SwingConstants.LEFT);
