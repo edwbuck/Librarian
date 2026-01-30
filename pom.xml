@@ -9,8 +9,10 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>23</maven.compiler.source>
-        <maven.compiler.target>23</maven.compiler.target>
+	    <app.name>${project.artifactId}</app.name>
+	    <app.version>${project.version}</app.version>
+        <maven.compiler.source>25</maven.compiler.source>
+        <maven.compiler.target>25</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -18,46 +20,102 @@
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
-            <version>24.0.0</version>
-            <scope>provided</scope>
+            <version>26.0.2-1</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.5.1</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>main.local.work.Main</mainClass>
-                                </transformer>
-                            </transformers>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.4</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <mainClass>main.local.work.Main</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+    	<version>3.6.2</version>
+    	<executions>
+          <execution>
+            <id>enforce-maven</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireMavenVersion>
+                  <version>4.0.0-rc-4</version>
+                </requireMavenVersion>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+     <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>4.0.0-beta-3</version>
+        <configuration>
+            <annotationProcessorPathsUseDepMgmt>true</annotationProcessorPathsUseDepMgmt>
+        </configuration>
+		</plugin>
+
+	    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.8.0</version>
+        <configuration>
+          <archive>
+            <manifest>
+		    <mainClass>main.local.work.Main</mainClass>
+            </manifest>
+          </archive>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+          <groupId>com.github.akman</groupId>
+          <artifactId>jpackage-maven-plugin</artifactId>
+          <version>0.1.5</version>
+          <executions>
+            <execution>
+            <id>jpackage-installer</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>jpackage</goal>
+            </goals>
+        </execution>
+            <execution>
+            <phase>package</phase>
+              <goals>
+                <goal>jpackage</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <name>${app.name}</name>
+            <appversion>${app.version}</appversion>
+            <copyright>${copyright}</copyright>
+            <vendor>${vendor.name}</vendor>
+            <mainjar>${app.name}-${app.version}-jar-with-dependencies.jar</mainjar>
+            <input>target/</input>
+            <mainclass>main.local.work.Main</mainclass>
+            <type>RPM</type>
+            <javaoptions>--enable-preview</javaoptions>
+            <dest>.</dest>
+          </configuration>
+        </plugin>
         </plugins>
     </build>
 </project>
+
+<!-- vim: set sw=4 ts=4 et ai : -->
